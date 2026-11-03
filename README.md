@@ -18,12 +18,16 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for branches, pull requests, offline chec
 Install Git and Python 3.11.
 [requirements.txt](requirements.txt) installs the direct dependencies in [replication/requirements.txt](replication/requirements.txt), with transitive versions constrained by [constraints-py311.txt](replication/constraints-py311.txt).
 The constraints were resolved and tested in a clean Windows Python 3.11.9 environment on 3 November 2026.
-GitHub Actions is configured to repeat the offline checks on Windows and Ubuntu with Python 3.11; a local check does not establish that a hosted run has passed.
+GitHub Actions runs the offline checks on Windows and Ubuntu with Python 3.11.
+Inspect the [current checks](https://github.com/ADB-Data-Division/adb-sar/actions) for the exact revision being reviewed.
 
 ```shell
-git clone https://github.com/sonleh96/adb-sar.git
+git clone https://github.com/ADB-Data-Division/adb-sar.git
 cd adb-sar
 ```
+
+The repository requires approved GitHub access while it is private.
+During review of the initial import, run `git switch codex/import-extraction` after cloning; the default `main` branch contains only the review placeholder until the pull request is merged.
 
 Windows PowerShell:
 
@@ -65,6 +69,20 @@ python -m replication.extract_covariates --tile-id N10E105_0_1 --start-month 201
 See [Execution](replication/README.md#execution) for other workflows and the [notebook guide](NOTEBOOKS.md) for experimental dependencies.
 The OpenWeather notebook requires the `OPENWEATHER_API_KEY` environment variable.
 Keep credentials out of code and saved outputs.
+
+## Repository structure and validation
+
+| Path | Role |
+| --- | --- |
+| `replication/` | Supported extraction and preprocessing CLIs, dependency constraints, and method/fixture validators. |
+| Root notebooks, `src/`, and `preprocess_spatial_models.py` | Historical research sources with additional inputs and dependencies; not a final paper-analysis workflow. |
+| `tools/check_publication.py`, `tests/` | Checks and regression tests for the tracked publication file inventory, notebook state, Python syntax, and extraction archive. |
+| `zenodo/README.md` | Draft combined Python and Stata deposit description; missing analysis inputs and author decisions remain explicit. |
+
+Run the complete command list in [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+The assembly validator exercises 100,000 synthetic rows with disk-backed duplicate checking and checks that Python allocations stay bounded.
+This is a local scaling check, not a full-dataset performance benchmark or a bound on total process memory.
+See [PUBLICATION.md](PUBLICATION.md) for the requirements, evidence, and unresolved release decisions.
 
 ## Code archive
 

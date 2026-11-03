@@ -19,8 +19,11 @@ python -m replication.validate_sample --self-test
 python -m replication.validate_sample --channel-graph-check
 python -m replication.validate_resampling
 python -m replication.validate_fire_detections
+python -m replication.validate_assembly
 python -m replication.validate_nightlights
 python -m replication.validate_release
+python -m unittest discover -s tests -v
+python tools/check_publication.py
 python -m replication.build_release --output release_outputs/adb-sar-extraction-preparation.zip
 git diff --check
 ```
@@ -35,6 +38,7 @@ Document the command, input version, runtime, and result when changing an extrac
 Supply account credentials through environment variables or the provider's normal local authentication mechanism.
 Never save tokens, passwords, service-account files, raw or restricted data, or executed notebook outputs in Git.
 Clear code-cell outputs, execution counts, and widget state before committing notebooks.
+Remove notebook attachments as well; Markdown attachments can retain data or images after code-cell outputs have been cleared.
 Inspect code and Markdown cells as well, since output clearing does not remove data or credentials embedded in source cells.
 Use synthetic fixtures for tests and identify them explicitly.
 Data sources retain their own access and redistribution terms.

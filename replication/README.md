@@ -16,7 +16,8 @@ These scripts neither reconstruct those steps nor establish that concatenated ex
 The CSV has additional `av_*`, plot, and lag fields whose pre-handoff construction remains unresolved; responsibility must be confirmed rather than assumed.
 
 Contact: Son Le, sonle.h96@gmail.com.
-GitHub: [sonleh96/adb-sar](https://github.com/sonleh96/adb-sar).
+GitHub: [ADB-Data-Division/adb-sar](https://github.com/ADB-Data-Division/adb-sar).
+Original source and historical revisions: [sonleh96/adb-sar](https://github.com/sonleh96/adb-sar).
 Historical covariate revision: `4b8944d8f86c1b917bdf0f52397540ed9b10e0d8`.
 Other notebook translations were initially reviewed at `c2766214c17e47cac94dc441c8e5353f1ee6931f`.
 The repository retains the original notebooks as historical sources, but the archive excludes them and the Python workflow does not require them.
@@ -288,6 +289,7 @@ The fire example is an offline plan; add `--project YOUR_PROJECT --submit` to re
 Use a small coordinates-only CSV for calendar sampling, rather than the complete multi-gigabyte handoff file.
 CSV assembly requires identical ordered headers and retains text values.
 Fire JSON conversion uses a stable union header, writes JSON null as blank, and adds no numeric precision reduction.
+Duplicate JSON field names, nested values, and non-finite numbers are rejected rather than silently selecting a value or emitting `nan` into the assembled CSV.
 Keep MODIS FRP and FIRMS T21 inputs separate; T21 JSON conversion uses `--key Timestamp --key country` instead of `GID` and `date`.
 The default duplicate check covers only the first 100,000 rows; `--duplicate-check sqlite` checks all exact text keys on disk.
 
@@ -299,6 +301,7 @@ python -m replication.validate_sample --channel-graph-check --report release_out
 python -m replication.validate_resampling
 python -m replication.validate_crop_mask --real-raster inputs/Vietnam_v23.09_10m/N08E104_2020_v23.09_10m.tif
 python -m replication.validate_nightlights
+python -m replication.validate_assembly
 python -m replication.validate_release
 python -m replication.validate_fire_detections
 python -m replication.validate_sample --csv PATH_TO_HANDOFF.csv --rows 1000

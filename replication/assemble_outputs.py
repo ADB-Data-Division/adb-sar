@@ -13,6 +13,7 @@ import argparse
 import csv
 import glob
 import json
+import math
 import os
 import sqlite3
 import sys
@@ -227,8 +228,16 @@ def assemble(
 
 
 def _load_json_record(path: Path) -> dict[str, object]:
+    def unique_fields(pairs: list[tuple[str, object]]) -> dict[str, object]:
+        record: dict[str, object] = {}
+        for name, value in pairs:
+            if name in record:
+                raise AssemblyError(f"duplicate JSON field {name!r} in {path}")
+            record[name] = value
+        return record
+
     try:
-        payload = json.loads(path.read_text(encoding="utf-8-sig"))
+        payload = json.loads(path.read_text(encoding="utf-8-sig"), object_pairs_hook=unique_fields)
     except json.JSONDecodeError as exc:
         raise AssemblyError(f"invalid JSON record {path}: {exc}") from exc
     if not isinstance(payload, dict) or not payload:
@@ -238,6 +247,8 @@ def _load_json_record(path: Path) -> dict[str, object]:
             raise AssemblyError(f"JSON record has a blank or non-string field name: {path}")
         if isinstance(value, (dict, list)):
             raise AssemblyError(f"JSON record field {name!r} is nested in {path}")
+        if isinstance(value, float) and not math.isfinite(value):
+            raise AssemblyError(f"JSON record field {name!r} is non-finite in {path}")
     return payload
 
 
