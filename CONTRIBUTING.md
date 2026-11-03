@@ -59,5 +59,6 @@ History rewriting and force-pushing require explicit agreement because they affe
 Explain the concrete behavior changed, the validation performed, and remaining limitations.
 Preserve upstream copyright notices and attribution when editing vendored or adapted code.
 Obtain review before merging and check that GitHub Actions has completed successfully.
-For the initial ADB publication, complete the unresolved items in [PUBLICATION.md](PUBLICATION.md) before treating the repository as final.
-The team's code licence must be confirmed by the authors and ADB; third-party MIT notices do not assign a licence to the whole repository.
+The authorized release scope and outstanding scientific and licensing work are recorded in [PUBLICATION.md](PUBLICATION.md).
+Do not describe this extraction-only release as a complete paper replication package.
+The team's code licence remains TBD pending the authors' and ADB's decision; third-party MIT notices do not assign a licence to the whole repository.

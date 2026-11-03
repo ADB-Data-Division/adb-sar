@@ -10,7 +10,9 @@ Bicubic and nightlights month corrections can change historical values, and reco
 See the extraction guide for provenance and unresolved inputs.
 Zenodo submission is pending.
 
-Preparation for the ADB public repository is tracked in [PUBLICATION.md](PUBLICATION.md).
+This release covers extraction and preprocessing only, with the documented gaps in full paper reproduction accepted for this scope.
+The team's code licence is TBD; third-party licence notices apply only to their respective contributions.
+Publication decisions and verification are recorded in [PUBLICATION.md](PUBLICATION.md).
 See [CONTRIBUTING.md](CONTRIBUTING.md) for branches, pull requests, offline checks, and data handling.
 
 ## Setup
@@ -25,9 +27,6 @@ Inspect the [current checks](https://github.com/ADB-Data-Division/adb-sar/action
 git clone https://github.com/ADB-Data-Division/adb-sar.git
 cd adb-sar
 ```
-
-The repository requires approved GitHub access while it is private.
-During review of the initial import, run `git switch codex/import-extraction` after cloning; the default `main` branch contains only the review placeholder until the pull request is merged.
 
 Windows PowerShell:
 
