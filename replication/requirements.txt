@@ -1,0 +1,12 @@
+# Direct execution dependencies. Use the accompanying Python 3.11 constraints.
+-c constraints-py311.txt
+earthengine-api==0.1.401
+numpy==1.26.4
+xarray==2023.6.0
+scipy==1.11.4
+rasterio==1.4.3
+affine==2.4.0
+shapely==2.0.6
+pyproj==3.6.1
+pandas==2.1.4
+h5py==3.9.0
